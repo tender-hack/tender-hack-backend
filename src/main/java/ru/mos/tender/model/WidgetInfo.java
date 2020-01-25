@@ -11,4 +11,5 @@ import java.util.UUID;
 public class WidgetInfo {
     private UUID uid;
     private WidgetType type;
+    private ExtraInfo extraInfo;
 }

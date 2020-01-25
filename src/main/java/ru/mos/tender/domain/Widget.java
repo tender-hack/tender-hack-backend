@@ -39,6 +39,9 @@ public class Widget {
     @Column(name = "counter")
     private Integer counter;
 
+    @Column(name = "extra")
+    private String extra;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
