@@ -22,26 +22,17 @@ public class WidgetsController {
 
     private final WidgetsService widgetsService;
 
-    @GetMapping(
-            path = "/default",
-            produces = APPLICATION_JSON_UTF8_VALUE
-    )
+    @GetMapping(path = "/default", produces = APPLICATION_JSON_UTF8_VALUE)
     public List<WidgetInfo> getDefaultWidgets() {
         return widgetsService.getDefaultWidgets();
     }
 
-    @GetMapping(
-            produces = APPLICATION_JSON_UTF8_VALUE
-    )
+    @GetMapping(produces = APPLICATION_JSON_UTF8_VALUE)
     public List<WidgetInfo> getUserWidgets() {
         return widgetsService.getUserWidgets(USER_ID);
     }
 
-    @PostMapping(
-            path = "/{uid}/increment",
-            consumes = APPLICATION_JSON_UTF8_VALUE,
-            produces = APPLICATION_JSON_UTF8_VALUE
-    )
+    @PostMapping(path = "/{uid}/increment")
     public void increment(@PathVariable("uid") UUID widgetUid) {
         widgetsService.increment(widgetUid, USER_ID);
     }

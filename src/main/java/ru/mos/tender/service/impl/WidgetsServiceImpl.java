@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.mos.tender.domain.Widget;
 import ru.mos.tender.enums.WidgetType;
 import ru.mos.tender.model.ExtraInfo;
@@ -31,6 +32,7 @@ public class WidgetsServiceImpl
 
     @Nonnull
     @Override
+    @Transactional(readOnly = true)
     public List<WidgetInfo> getDefaultWidgets() {
         return widgetRepository
                 .findAllByUserId(DEFAULT_USER_ID)
@@ -41,6 +43,7 @@ public class WidgetsServiceImpl
 
     @Nonnull
     @Override
+    @Transactional(readOnly = true)
     public List<WidgetInfo> getUserWidgets(@Nonnull Long userId) {
         return Stream
                 .concat(
@@ -52,12 +55,14 @@ public class WidgetsServiceImpl
     }
 
     @Override
+    @Transactional
     public void increment(@Nonnull UUID widgetUid, @Nonnull Long userId) {
         widgetRepository.increment(widgetUid, userId);
     }
 
     @Nonnull
     @Override
+    @Transactional
     public WidgetInfo saveNewWidget(@Nonnull Widget widget) {
         widget.setCounter(0);
         widgetRepository.save(widget);
