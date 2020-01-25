@@ -3,7 +3,7 @@ package ru.mos.tender.repository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-import ru.mos.tender.model.entity.SearchEntity;
+import ru.mos.tender.domain.entity.SearchEntity;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package ru.mos.tender.model.entity;
+package ru.mos.tender.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

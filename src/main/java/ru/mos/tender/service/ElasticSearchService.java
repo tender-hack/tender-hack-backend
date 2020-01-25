@@ -1,10 +1,10 @@
 package ru.mos.tender.service;
 
-import ru.mos.tender.model.WidgetInfo;
+import ru.mos.tender.model.ElasticResponse;
 
 import javax.annotation.Nonnull;
 
 public interface ElasticSearchService {
     @Nonnull
-    WidgetInfo fullTextSearch(@Nonnull String text);
+    ElasticResponse fullTextSearch(@Nonnull String text);
 }
