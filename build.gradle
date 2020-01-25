@@ -23,7 +23,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-logging"
 
-    compile "com.github.voteva:operation-history-model:${operationHistoryModels}"
     compile "com.google.code.gson:gson:${gsonVersion}"
     compile "com.google.guava:guava:${guavaVersion}"
     compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
