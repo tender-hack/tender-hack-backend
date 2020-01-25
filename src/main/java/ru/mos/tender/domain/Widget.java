@@ -32,6 +32,9 @@ public class Widget {
     @Column(name = "widget_uid", nullable = false)
     private UUID widgetUid;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private WidgetType type;
@@ -50,6 +53,7 @@ public class Widget {
         return new EqualsBuilder()
                 .append(userId, widget.userId)
                 .append(widgetUid, widget.widgetUid)
+                .append(name, widget.name)
                 .append(type, widget.type)
                 .isEquals();
     }
@@ -59,6 +63,7 @@ public class Widget {
         return new HashCodeBuilder(17, 37)
                 .append(userId)
                 .append(widgetUid)
+                .append(name)
                 .append(type)
                 .toHashCode();
     }
@@ -69,6 +74,7 @@ public class Widget {
                 .toStringHelper(this)
                 .add("userId", userId)
                 .add("widgetUid", widgetUid)
+                .add("name", name)
                 .add("type", type)
                 .toString();
     }

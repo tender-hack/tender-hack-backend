@@ -68,6 +68,7 @@ public class WidgetsServiceImpl
         ExtraInfo extraInfo = gson.fromJson(widget.getExtra(), getExtraInfoClass(widget.getType()));
         return new WidgetInfo()
                 .setUid(widget.getWidgetUid())
+                .setName(widget.getName())
                 .setType(widget.getType())
                 .setExtraInfo(extraInfo);
     }

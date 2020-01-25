@@ -10,6 +10,7 @@ import java.util.UUID;
 @Accessors(chain = true)
 public class WidgetInfo {
     private UUID uid;
+    private String name;
     private WidgetType type;
     private ExtraInfo extraInfo;
 }
