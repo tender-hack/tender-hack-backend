@@ -1,5 +1,5 @@
 plugins {
-    id "org.springframework.boot" version "2.1.7.RELEASE"
+    id "org.springframework.boot" version "2.2.1.RELEASE"
 }
 
 apply plugin: "java"
@@ -41,6 +41,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok"
 
     compile "org.springframework.data:spring-data-elasticsearch"
+
 }
 
 idea {

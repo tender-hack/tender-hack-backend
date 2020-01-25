@@ -1,4 +1,4 @@
-package ru.mos.tender.service;
+package ru.mos.tender.service.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,6 +10,7 @@ import ru.mos.tender.model.ExtraInfo;
 import ru.mos.tender.model.NavigationExtraInfo;
 import ru.mos.tender.model.WidgetInfo;
 import ru.mos.tender.repository.WidgetRepository;
+import ru.mos.tender.service.WidgetsService;
 
 import javax.annotation.Nonnull;
 import java.util.List;
