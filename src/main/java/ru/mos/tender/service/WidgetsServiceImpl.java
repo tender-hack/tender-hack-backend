@@ -14,6 +14,7 @@ import ru.mos.tender.repository.WidgetRepository;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
@@ -22,16 +23,28 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class WidgetsServiceImpl
         implements WidgetsService {
+    private static final Long DEFAULT_USER_ID = 0L;
 
     private final WidgetRepository widgetRepository;
     private final Gson gson = new GsonBuilder().create();
 
     @Nonnull
     @Override
-    public List<WidgetInfo> getUserWidgets(@Nonnull Long userId) {
+    public List<WidgetInfo> getDefaultWidgets() {
         return widgetRepository
-                .findAllByUserId(userId)
+                .findAllByUserId(DEFAULT_USER_ID)
                 .stream()
+                .map(this::toWidgetInfo)
+                .collect(toList());
+    }
+
+    @Nonnull
+    @Override
+    public List<WidgetInfo> getUserWidgets(@Nonnull Long userId) {
+        return Stream
+                .concat(
+                        widgetRepository.findAllByUserId(userId).stream(),
+                        widgetRepository.findAllByUserId(DEFAULT_USER_ID).stream())
                 .sorted(comparingInt(Widget::getCounter))
                 .map(this::toWidgetInfo)
                 .collect(toList());
