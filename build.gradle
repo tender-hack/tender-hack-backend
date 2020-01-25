@@ -1,0 +1,55 @@
+plugins {
+    id "org.springframework.boot" version "2.1.7.RELEASE"
+}
+
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply from: "libraries.gradle"
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-logging"
+
+    compile "com.github.voteva:operation-history-model:${operationHistoryModels}"
+    compile "com.google.code.gson:gson:${gsonVersion}"
+    compile "com.google.guava:guava:${guavaVersion}"
+    compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
+
+    compile "io.swagger:swagger-annotations:${swaggerVersion}"
+    compile "io.springfox:springfox-swagger-ui:${swaggerSpringVersion}"
+    compile "io.springfox:springfox-swagger2:${swaggerSpringVersion}"
+
+    compileOnly "com.google.code.findbugs:jsr305:${findBugsVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    annotationProcessor "org.projectlombok:lombok"
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+springBoot {
+    buildInfo()
+}
+
+bootJar {
+    archiveFileName = "${project.name}.jar"
+}

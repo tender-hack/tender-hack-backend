@@ -1,0 +1,10 @@
+ext {
+    gsonVersion = "2.8.5"
+    guavaVersion = "23.0"
+    commonsLangVersion = "3.7"
+    swaggerSpringVersion = "2.9.2"
+    swaggerVersion = "1.5.21"
+    findBugsVersion = "3.0.2"
+    lombokVersion = "1.18.2"
+    operationHistoryModels = "1.0.2-SNAPSHOT"
+}
