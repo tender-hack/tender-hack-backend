@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.common.unit.Fuzziness;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 @Service
+@ConditionalOnBean(ElasticsearchTemplate.class)
 public class ElasticSearchServiceImpl implements ElasticSearchService {
 
     private final ElasticsearchTemplate elasticsearchTemplate;
