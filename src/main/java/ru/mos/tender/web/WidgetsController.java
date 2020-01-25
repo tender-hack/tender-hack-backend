@@ -23,6 +23,14 @@ public class WidgetsController {
     private final WidgetsService widgetsService;
 
     @GetMapping(
+            path = "/default",
+            produces = APPLICATION_JSON_UTF8_VALUE
+    )
+    public List<WidgetInfo> getDefaultWidgets() {
+        return widgetsService.getDefaultWidgets();
+    }
+
+    @GetMapping(
             produces = APPLICATION_JSON_UTF8_VALUE
     )
     public List<WidgetInfo> getUserWidgets() {

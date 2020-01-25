@@ -10,6 +10,9 @@ import java.util.UUID;
 public interface WidgetsService {
 
     @Nonnull
+    List<WidgetInfo> getDefaultWidgets();
+
+    @Nonnull
     List<WidgetInfo> getUserWidgets(@Nonnull Long userId);
 
     void increment(@Nonnull UUID widgetUid, @Nonnull Long userId);
