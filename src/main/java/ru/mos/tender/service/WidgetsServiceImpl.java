@@ -37,6 +37,14 @@ public class WidgetsServiceImpl
     }
 
     @Nonnull
+    @Override
+    public WidgetInfo saveNewWidget(@Nonnull Widget widget) {
+        widget.setCounter(0);
+        widgetRepository.save(widget);
+        return toWidgetInfo(widget);
+    }
+
+    @Nonnull
     private WidgetInfo toWidgetInfo(@Nonnull Widget widget) {
         return new WidgetInfo()
                 .setUid(widget.getWidgetUid())

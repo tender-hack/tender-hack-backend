@@ -1,5 +1,6 @@
 package ru.mos.tender.service;
 
+import ru.mos.tender.domain.Widget;
 import ru.mos.tender.model.WidgetInfo;
 
 import javax.annotation.Nonnull;
@@ -12,4 +13,7 @@ public interface WidgetsService {
     List<WidgetInfo> getUserWidgets(@Nonnull Long userId);
 
     void increment(@Nonnull UUID widgetUid, @Nonnull Long userId);
+
+    @Nonnull
+    WidgetInfo saveNewWidget(@Nonnull Widget widget);
 }
