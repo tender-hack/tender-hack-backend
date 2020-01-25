@@ -37,6 +37,7 @@ public class WidgetsServiceImpl
         return widgetRepository
                 .findAllByUserId(DEFAULT_USER_ID)
                 .stream()
+                .sorted((w1, w2) -> w2.getCounter() - w1.getCounter())
                 .map(this::toWidgetInfo)
                 .collect(toList());
     }
@@ -49,7 +50,7 @@ public class WidgetsServiceImpl
                 .concat(
                         widgetRepository.findAllByUserId(userId).stream(),
                         widgetRepository.findAllByUserId(DEFAULT_USER_ID).stream())
-                .sorted(comparingInt(Widget::getCounter))
+                .sorted((w1, w2) -> w2.getCounter() - w1.getCounter())
                 .map(this::toWidgetInfo)
                 .collect(toList());
     }
