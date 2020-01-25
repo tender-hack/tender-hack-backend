@@ -7,11 +7,13 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 import java.net.InetAddress;
 
+@Profile("local")
 @Configuration
 @EnableElasticsearchRepositories
 public class ElasticConfig {
@@ -27,7 +29,6 @@ public class ElasticConfig {
 
     @Bean
     public Client client() throws Exception {
-
         Settings esSettings = Settings.builder()
                 .put("cluster.name", esClusterName)
                 .build();
@@ -40,6 +41,4 @@ public class ElasticConfig {
     public ElasticsearchTemplate elasticsearchTemplate() throws Exception {
         return new ElasticsearchTemplate(client());
     }
-
-
 }
