@@ -39,6 +39,8 @@ dependencies {
 
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     annotationProcessor "org.projectlombok:lombok"
+
+    compile "org.springframework.data:spring-data-elasticsearch"
 }
 
 idea {
