@@ -22,12 +22,17 @@ public class ChatController {
     private final ChatService chatService;
     private final ElasticSearchService elasticSearchService;
 
-    @PostMapping(
-            path = "/default",
-            produces = APPLICATION_JSON_UTF8_VALUE
-    )
+    @PostMapping("/default")
     public Answer processQuestion(@RequestBody Question question) {
         return chatService.process(question);
+    }
+
+    @GetMapping(
+            path = "/answer",
+            produces = APPLICATION_JSON_UTF8_VALUE
+    )
+    public ElasticResponse getResponse(String text){
+        return elasticSearchService.fullTextSearch(text); //todo: test endpoint for elastic
     }
 
 }

@@ -813,5 +813,40 @@
     "type": "TEXT",
     "query": "Проверка блокировки поставщика",
     "text": "Вы можете авторизоваться на Портале Поставщиков и проверить наличие надписи: \"Компания заблокирована\" возле имени профиля в правом верхнем углу экрана. Если надпись присутствует, значит Ваша компания заблокирована.  "
+  },
+  {
+    "type": "NAVIGATION",
+    "query": "Котировки сто двести",
+    "text": "offerauction?s.lastBetCostGreatEqual=100&s.lastBetCostLessEqual=200&v.ps=10&v.s=startDate&v.sd"
+  },
+  {
+    "type": "NAVIGATION",
+    "query": "Котировки январь",
+    "text": "offerauction?s.startDateGreatEqual=01.01.2020%2000:00:00&s.startDateLessEqual=31.01.2020%2023:59:59&v.ps=10&v.s=startDate&v.sd"
+  },
+  {
+    "type": "NAVIGATION_PROPERTY",
+    "name": "s.stateIdIn",
+    "query": "Котировка проведена",
+    "text": "19000004"
+  },
+  {
+    "type": "NAVIGATION_PROPERTY",
+    "name": "s.stateIdIn",
+    "query": "Котировка активна",
+    "text": "19000002"
+  },
+  {
+    "type": "NAVIGATION_PROPERTY",
+    "name": "s.stateIdIn",
+    "query": "Котировка снята с публикации",
+    "text": "19000005"
+  },
+  {
+    "type": "NAVIGATION_PROPERTY",
+    "name": "s.stateIdIn",
+    "query": "Котировка не состоялась",
+    "text": "19000003"
   }
+
 ]

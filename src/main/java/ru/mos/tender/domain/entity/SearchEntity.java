@@ -30,6 +30,8 @@ public class SearchEntity {
 
     private String text;
 
+    private String name;
+
     private String type;
 
 }

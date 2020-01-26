@@ -2,6 +2,7 @@ package ru.mos.tender.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -29,19 +30,13 @@ import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 @Service
 @ConditionalOnBean(ElasticsearchTemplate.class)
+@RequiredArgsConstructor
 public class ElasticSearchServiceImpl implements ElasticSearchService {
 
     private final ElasticsearchTemplate elasticsearchTemplate;
     private final ObjectMapper objectMapper;
     private final SearchRepository searchRepository;
-
-    public ElasticSearchServiceImpl(ElasticsearchTemplate elasticsearchTemplate,
-                                    ObjectMapper objectMapper,
-                                    SearchRepository searchRepository) {
-        this.elasticsearchTemplate = elasticsearchTemplate;
-        this.objectMapper = objectMapper;
-        this.searchRepository = searchRepository;
-    }
+    private final NavURIBuilder navURIBuilder;
 
     @PostConstruct
     @SneakyThrows({JsonProcessingException.class, IOException.class})
@@ -53,17 +48,29 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 
     @Override
     public ElasticResponse fullTextSearch(String query) {
-        List<ElasticResponse> elasticResponse = elasticsearchTemplate.queryForList(new NativeSearchQueryBuilder()
+        List<SearchEntity> searchEntities = elasticsearchTemplate.queryForList(new NativeSearchQueryBuilder()
                 .withQuery(matchQuery("query", query)
                         .analyzer("main_analyzer")
                         .fuzziness(Fuzziness.ONE)
                         .minimumShouldMatch("-50%"))
-                .build(), SearchEntity.class)
+                .build(), SearchEntity.class);
+
+        List<SearchEntity> navs = searchEntities.stream()
+                .filter(ElasticResponseType::isNav)
+                .collect(Collectors.toList());
+
+        List<ElasticResponse> elasticResponses = searchEntities
                 .stream()
+                .filter(ElasticResponseType::isNotNav)
                 .map(this::buildElasticResponse)
                 .collect(Collectors.toList());
+
+        navURIBuilder.fromSearchEntities(navs)
+                .forEach(navSE -> elasticResponses.add(new ElasticResponse()
+                        .setExtraInfo(new NavigationExtraInfo(navSE.toString()))
+                        .setType(ElasticResponseType.NAVIGATION)));
         //todo: временный костыль, надо исправить
-        return elasticResponse.isEmpty() ? null : elasticResponse.get(0);
+        return elasticResponses.isEmpty() ? null : elasticResponses.get(0);
     }
 
     @Nonnull
@@ -72,9 +79,6 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
         switch (ElasticResponseType.valueOf(entity.getType().toUpperCase())) {
             case TEXT:
                 extraInfo = new TextExtraInfo().setText(entity.getText());
-                break;
-            case NAVIGATION:
-                extraInfo = new NavigationExtraInfo().setUrl(entity.getText());
                 break;
             default:
                 extraInfo = new ExtraInfo();
