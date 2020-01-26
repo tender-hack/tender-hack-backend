@@ -60,6 +60,10 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                         .minimumShouldMatch("-50%"))
                 .build(), SearchEntity.class);
 
+        if (CollectionUtils.isEmpty(searchEntities)) {
+            return buildElasticResponse(SearchEntity.fallbackAnswer(query));
+        }
+
         searchEntities.forEach(se -> se.setId(UUID.randomUUID()));
 
         UUID winnerID = searchEntities
@@ -76,6 +80,10 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                 .map(this::buildElasticResponse)
                 .collect(Collectors.toList());
 
+        if (CollectionUtils.isEmpty(elasticResponses)) {
+            return buildElasticResponse(SearchEntity.fallbackAnswer(query));
+        }
+
         navURIBuilder.fromSearchEntities(navs)
                 .forEach(navURL -> elasticResponses.add(new ElasticResponse()
                         .setQuery(navURL.getSearchEntity().getQuery())
@@ -85,11 +93,6 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                                 navURL.getSearchEntity().getQuery(),
                                 navURL.getSearchEntity().getText()))
                         .setType(ElasticResponseType.NAVIGATION)));
-
-        //todo: временный костыль, надо исправить
-        if (CollectionUtils.isEmpty(elasticResponses)) {
-            return buildElasticResponse(SearchEntity.fallbackAnswer(query));
-        }
 
         return elasticResponses.stream().filter(er -> er.getSearchEntityId().equals(winnerID))
                 .findFirst().orElse(elasticResponses.get(0));
