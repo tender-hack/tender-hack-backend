@@ -10,6 +10,5 @@ import java.util.UUID;
 @Data
 @Accessors(chain = true)
 public class Answer {
-    private String textAnswer;
-    private Map<String, String> chartAnswer;
+    private ExtraInfo answerField;
 }
