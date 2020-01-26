@@ -40,7 +40,7 @@ public class Widget {
     @Column(name = "widget_uid", nullable = false)
     private UUID widgetUid;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Enumerated(EnumType.STRING)
