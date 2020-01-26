@@ -38,7 +38,7 @@ public class NavURIBuilder {
                 log.warn("no uris entities found");
             }
             for (SearchEntity uriSE : uriList) {
-                URIBuilder builder = new URIBuilder(uriSE.getText());
+                URIBuilder builder = new URIBuilder(uriSE.getUrl());
                 Map<String, String> params = parseParameters(uriParams);
                 for (Map.Entry<String, String> p : params.entrySet()) {
                     builder.addParameter(p.getKey(), p.getValue());
