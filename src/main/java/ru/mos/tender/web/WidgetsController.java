@@ -1,18 +1,14 @@
 package ru.mos.tender.web;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.mos.tender.domain.Widget;
+import ru.mos.tender.enums.WidgetType;
 import ru.mos.tender.model.WidgetInfo;
 import ru.mos.tender.service.WidgetsService;
 
 import java.util.List;
 import java.util.UUID;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,5 +31,15 @@ public class WidgetsController {
     @PostMapping(path = "/{uid}/increment")
     public void increment(@PathVariable("uid") UUID widgetUid) {
         widgetsService.increment(widgetUid, USER_ID);
+    }
+
+    @GetMapping(path = "/save")
+    public void saveNewWidget() {
+        Widget widget = new Widget()
+                .setExtra("{\"url\":\"/contract\"}")
+                .setName("Перейти на мои контракты")
+                .setType(WidgetType.NAVIGATION)
+                .setSubType("CONTRACTS");
+        widgetsService.saveNewWidget(widget);
     }
 }

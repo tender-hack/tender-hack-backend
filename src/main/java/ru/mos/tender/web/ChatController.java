@@ -16,7 +16,6 @@ import ru.mos.tender.service.ChatService;
 @RequestMapping("/api/v1/chat")
 @ConditionalOnBean(ElasticsearchTemplate.class)
 public class ChatController {
-    private static final long USER_ID = 1;
 
     private final ChatService chatService;
 

@@ -63,7 +63,7 @@ public class WidgetsServiceImpl
     @Transactional
     public WidgetInfo saveNewWidget(@Nonnull Widget widget) {
         widget
-                .setCounter(1)
+                .setCounter(2)
                 .setUserId(1L)
                 .setWidgetUid(UUID.randomUUID());
 
