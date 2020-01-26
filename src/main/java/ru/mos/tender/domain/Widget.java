@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import ru.mos.tender.enums.WidgetSubType;
 import ru.mos.tender.enums.WidgetType;
 
 import javax.persistence.Column;
@@ -42,9 +41,8 @@ public class Widget {
     @Column(name = "type", nullable = false)
     private WidgetType type;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "sub_type")
-    private WidgetSubType subType;
+    private String subType;
 
     @Column(name = "counter")
     private Integer counter;
