@@ -5,11 +5,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import ru.mos.tender.enums.WidgetType;
 import ru.mos.tender.model.ElasticResponse;
+import ru.mos.tender.model.NavigationExtraInfo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,7 +61,7 @@ public class Widget {
         Widget widget = new Widget();
         widget.setCounter(1);
         widget.setExtra(gson.toJson(response.getExtraInfo()));
-        widget.setName(response.getQuery());
+        widget.setName(response.getTitle());
         widget.setType(WidgetType.NAVIGATION);
         widget.setSubType(detectSubtype(response));
 
@@ -68,11 +70,30 @@ public class Widget {
     }
 
     private static String detectSubtype(ElasticResponse response) {
+        NavigationExtraInfo extraInfo = (NavigationExtraInfo) response.getExtraInfo();
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "quotes")) {
+            return "QUOTES";
+        }
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "back")) {
+            return "BACK";
+        }
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "offer")) {
+            return "OFFER";
+        }
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "sign")) {
+            return "SIGN";
+        }
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "login")) {
+            return "LOGIN";
+        }
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "question")) {
+            return "QUESTION";
+        }
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "contract")) {
+            return "CONTRACT";
+        }
 
-//        if (StringUtils.containsIgnoreCase(response.getExtraInfo().getText(), "")) {
-//        }
-        //TODO
-        return "";
+        throw new IllegalArgumentException("Не смогла я");
     }
 
     @Override

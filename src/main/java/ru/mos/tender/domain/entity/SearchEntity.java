@@ -32,6 +32,8 @@ public class SearchEntity {
 
     private String text;
 
+    private String title;
+
     private String name;
 
     private String type;

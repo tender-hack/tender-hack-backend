@@ -13,6 +13,7 @@ public class ElasticResponse {
     @JsonIgnore
     private UUID searchEntityId;
     private String query;
+    private String title;
     private ElasticResponseType type;
     private ExtraInfo extraInfo;
 }

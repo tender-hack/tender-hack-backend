@@ -836,78 +836,80 @@
   },
   {
     "type": "NAVIGATION",
-    "query": "Котировки сто двести",
-    "url": "offerauction?s.lastBetCostGreatEqual=100&s.lastBetCostLessEqual=200&v.ps=10&v.s=startDate&v.sd"
-  },
-  {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "s.stateIdIn",
-    "query": "Котировка проведена",
-    "text": "19000004"
-  },
-  {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "s.stateIdIn",
-    "query": "Котировка активна",
-    "text": "19000002"
-  },
-  {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "s.stateIdIn",
-    "query": "Котировка снята с публикации",
-    "text": "19000005"
-  },
-  {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "s.stateIdIn",
-    "query": "Котировка не состоялась",
-    "text": "19000003"
+    "query": "Переход в мои котировки",
+    "title": "Переход в мои котировки",
+    "text": "Открываю",
+    "url": "/quotes"
   },
   {
     "type": "NAVIGATION",
-    "query": "СОЗДАТЬ ДОКУМЕНТ",
-    "url": "filelib/new/edit"
+    "query": "Котировки",
+    "title": "Переход в мои котировки",
+    "text": "Открываю",
+    "url": "/quotes"
   },
   {
     "type": "NAVIGATION",
-    "query": "НОВЫЙ ДОКУМЕНТ",
-    "url": "filelib/new/edit"
+    "query": "покажи котировки",
+    "text": "Открываю",
+    "title": "Переход в мои котировки",
+    "url": "/quotes"
   },
   {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "name",
-    "query": "с названием, название, наименование, называется, имя",
-    "text": "19000003"
+    "type": "NAVIGATION",
+    "query": "создать новую оферту",
+    "text": "Открываю",
+    "title": "Создать новую оферту",
+    "url": "/offers"
   },
   {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "number",
-    "query": "номер, с номером",
-    "text": "19000003"
+    "type": "NAVIGATION",
+    "query": "новая оферта",
+    "text": "Открываю",
+    "title": "Создать новую оферту",
+    "url": "/offers"
   },
   {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "type",
-    "query": "тип изображение",
-    "text": "Изображение"
+    "type": "NAVIGATION",
+    "query": "Оферта",
+    "text": "Открываю",
+    "title": "Создать новую оферту",
+    "url": "/offers"
   },
   {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "type",
-    "query": "тип проект контракта",
-    "text": "Проект контракта"
+    "type": "NAVIGATION",
+    "query": "контракты",
+    "text": "Открываю",
+    "title": "Переход в контракты",
+    "url": "/contracts"
   },
   {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "type",
-    "query": "тип прайс лист поставщика",
-    "text": "Прайс-лист поставщика"
+    "type": "NAVIGATION",
+    "query": "переход в мои контракты",
+    "text": "Открываю",
+    "title": "Переход в контракты",
+    "url": "/contracts"
   },
   {
-    "type": "NAVIGATION_PROPERTY",
-    "name": "type",
-    "query": "тип лицензия",
-    "text": "Лицензия"
+    "type": "NAVIGATION",
+    "query": "переход в мой профиль",
+    "text": "Открываю",
+    "title": "Переход в профиль",
+    "url": "/profile"
+  },
+  {
+    "type": "NAVIGATION",
+    "query": "мой профиль",
+    "text": "Открываю",
+    "title": "Переход в профиль",
+    "url": "/profile"
+  },
+  {
+    "type": "NAVIGATION",
+    "query": "профиль",
+    "text": "Открываю",
+    "title": "Переход в профиль",
+    "url": "/profile"
   },
   {
     "type": "CHART",

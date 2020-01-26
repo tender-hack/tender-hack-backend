@@ -1,0 +1,87 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2020_01_26_01_TheBigBang" author="streltsov.a.y">
+        <preConditions onFail="CONTINUE">
+            <and>
+                <tableExists tableName="widgets"/>
+                <rowCount tableName="widgets" expectedRows="0"/>
+            </and>
+        </preConditions>
+
+        <insert tableName="widgets">
+            <column name="counter" value="3"/>
+            <column name="extra">
+                {"url":"/unauthorized/instruction/customer"}
+            </column>
+            <column name="name" value="Как стать заказчиком?"/>
+            <column name="type" value="NAVIGATION"/>
+            <column name="user_id" value="0"/>
+            <column name="widget_uid" value="03c21dd4-a970-41c5-bd2d-f5263cc99835"/>
+            <column name="sub_type" value="QUESTION"/>
+        </insert>
+
+        <insert tableName="widgets">
+            <column name="counter" value="2"/>
+            <column name="extra">
+                {"url":"/unauthorized/instruction/supplier"}
+            </column>
+            <column name="name" value="Как стать поставщиком?"/>
+            <column name="type" value="NAVIGATION"/>
+            <column name="user_id" value="0"/>
+            <column name="widget_uid" value="aa7c4e64-f3a5-4348-ada3-80c05e9c43b7"/>
+            <column name="sub_type" value="QUESTION"/>
+        </insert>
+
+        <insert tableName="widgets">
+            <column name="counter" value="13"/>
+            <column name="extra">
+                {"url":"/quotes"}
+            </column>
+            <column name="name" value="Перейти в раздел мои котировки"/>
+            <column name="type" value="NAVIGATION"/>
+            <column name="user_id" value="1"/>
+            <column name="widget_uid" value="a782f8c6-ecbb-4629-a52a-3d1a7cf68f3d"/>
+            <column name="sub_type" value="QUOTES"/>
+        </insert>
+
+        <insert tableName="widgets">
+            <column name="counter" value="15"/>
+            <column name="extra">
+                {"url":"/offers"}
+            </column>
+            <column name="name" value="Создать новую оферту"/>
+            <column name="type" value="NAVIGATION"/>
+            <column name="user_id" value="1"/>
+            <column name="widget_uid" value="b26f6562-e7fd-404e-b22c-00626b216f4f"/>
+            <column name="sub_type" value="OFFER"/>
+        </insert>
+
+        <insert tableName="widgets">
+            <column name="counter" value="1"/>
+            <column name="extra">
+                {"url":"/unauthorized/ecp"}
+            </column>
+            <column name="name" value="Оформить ЭЦП"/>
+            <column name="type" value="NAVIGATION"/>
+            <column name="user_id" value="0"/>
+            <column name="widget_uid" value="103789bc-6002-4514-a2e2-f2750833262b"/>
+            <column name="sub_type" value="SIGN"/>
+        </insert>
+
+        <insert tableName="widgets">
+            <column name="counter" value="0"/>
+            <column name="extra">
+                {"url":"/unauthorized/register"}
+            </column>
+            <column name="name" value="Форма регистрации"/>
+            <column name="type" value="NAVIGATION"/>
+            <column name="user_id" value="0"/>
+            <column name="widget_uid" value="d4ee9e64-0155-4884-9adc-f637287a0cd9"/>
+            <column name="sub_type" value="LOGIN"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

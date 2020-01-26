@@ -80,19 +80,21 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                 .map(this::buildElasticResponse)
                 .collect(Collectors.toList());
 
+        navURIBuilder.fromSearchEntities(navs)
+                .forEach(navURL -> elasticResponses.add(
+                        new ElasticResponse()
+                                .setTitle(navURL.getSearchEntity().getTitle())
+                                .setQuery(navURL.getSearchEntity().getQuery())
+                                .setSearchEntityId(navURL.getSearchEntity().getId())
+                                .setExtraInfo(NavigationExtraInfo.valueOf(
+                                        navURL.getUri().toString(),
+                                        navURL.getSearchEntity().getQuery(),
+                                        navURL.getSearchEntity().getText()))
+                                .setType(ElasticResponseType.NAVIGATION)));
+
         if (CollectionUtils.isEmpty(elasticResponses)) {
             return buildElasticResponse(SearchEntity.fallbackAnswer(query));
         }
-
-        navURIBuilder.fromSearchEntities(navs)
-                .forEach(navURL -> elasticResponses.add(new ElasticResponse()
-                        .setQuery(navURL.getSearchEntity().getQuery())
-                        .setSearchEntityId(navURL.getSearchEntity().getId())
-                        .setExtraInfo(NavigationExtraInfo.valueOf(
-                                navURL.getUri().toString(),
-                                navURL.getSearchEntity().getQuery(),
-                                navURL.getSearchEntity().getText()))
-                        .setType(ElasticResponseType.NAVIGATION)));
 
         return elasticResponses.stream().filter(er -> er.getSearchEntityId().equals(winnerID))
                 .findFirst().orElse(elasticResponses.get(0));
@@ -114,6 +116,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                 extraInfo = new ExtraInfo();
         }
         return new ElasticResponse()
+                .setTitle(entity.getTitle())
                 .setSearchEntityId(entity.getId())
                 .setQuery(entity.getQuery())
                 .setExtraInfo(extraInfo)

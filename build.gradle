@@ -41,7 +41,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok"
 
     compile "org.springframework.data:spring-data-elasticsearch"
-
+    implementation 'org.liquibase:liquibase-core'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
