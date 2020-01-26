@@ -880,35 +880,35 @@
     "type": "NAVIGATION",
     "query": "контракты",
     "text": "Открываю",
-    "title": "Переход в контракты",
+    "title": "Переход в мои контракты",
     "url": "/contracts"
   },
   {
     "type": "NAVIGATION",
     "query": "переход в мои контракты",
     "text": "Открываю",
-    "title": "Переход в контракты",
+    "title": "Переход в мои контракты",
     "url": "/contracts"
   },
   {
     "type": "NAVIGATION",
     "query": "переход в мой профиль",
     "text": "Открываю",
-    "title": "Переход в профиль",
+    "title": "Переход в мой профиль",
     "url": "/profile"
   },
   {
     "type": "NAVIGATION",
     "query": "мой профиль",
     "text": "Открываю",
-    "title": "Переход в профиль",
+    "title": "Переход в мой профиль",
     "url": "/profile"
   },
   {
     "type": "NAVIGATION",
     "query": "профиль",
     "text": "Открываю",
-    "title": "Переход в профиль",
+    "title": "Переход в мой профиль",
     "url": "/profile"
   },
   {

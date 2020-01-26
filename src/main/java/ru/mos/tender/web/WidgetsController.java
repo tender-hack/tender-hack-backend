@@ -36,8 +36,8 @@ public class WidgetsController {
     @GetMapping(path = "/save")
     public void saveNewWidget() {
         Widget widget = new Widget()
-                .setExtra("{\"url\":\"/contract\"}")
-                .setName("Перейти на мои контракты")
+                .setExtra("{\"url\":\"/contracts\"}")
+                .setName("Перейти в мои контракты")
                 .setType(WidgetType.NAVIGATION)
                 .setSubType("CONTRACTS");
         widgetsService.create(widget);
