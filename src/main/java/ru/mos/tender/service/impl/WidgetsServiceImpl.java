@@ -65,7 +65,11 @@ public class WidgetsServiceImpl
     @Override
     @Transactional
     public WidgetInfo saveNewWidget(@Nonnull Widget widget) {
-        widget.setCounter(0);
+        widget
+                .setCounter(1)
+                .setUserId(1L)
+                .setWidgetUid(UUID.randomUUID());
+
         widgetRepository.save(widget);
         return toWidgetInfo(widget);
     }
@@ -77,6 +81,7 @@ public class WidgetsServiceImpl
                 .setUid(widget.getWidgetUid())
                 .setName(widget.getName())
                 .setType(widget.getType())
+                .setSubType(widget.getSubType())
                 .setExtraInfo(extraInfo);
     }
 

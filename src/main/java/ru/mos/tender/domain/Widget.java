@@ -2,8 +2,10 @@ package ru.mos.tender.domain;
 
 import com.google.common.base.MoreObjects;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import ru.mos.tender.enums.WidgetSubType;
 import ru.mos.tender.enums.WidgetType;
 
 import javax.persistence.Column;
@@ -19,6 +21,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "widgets")
+@Accessors(chain = true)
 public class Widget {
 
     @Id
@@ -38,6 +41,10 @@ public class Widget {
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private WidgetType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sub_type")
+    private WidgetSubType subType;
 
     @Column(name = "counter")
     private Integer counter;
