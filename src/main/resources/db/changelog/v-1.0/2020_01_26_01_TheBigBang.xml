@@ -36,7 +36,7 @@
         </insert>
 
         <insert tableName="widgets">
-            <column name="counter" value="13"/>
+            <column name="counter" value="2"/>
             <column name="extra">
                 {"url":"/quotes"}
             </column>
@@ -48,7 +48,7 @@
         </insert>
 
         <insert tableName="widgets">
-            <column name="counter" value="15"/>
+            <column name="counter" value="3"/>
             <column name="extra">
                 {"url":"/offers"}
             </column>
