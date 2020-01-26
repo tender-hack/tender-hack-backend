@@ -43,7 +43,7 @@ public class SearchEntity {
     public static SearchEntity fallbackAnswer(String query) {
         SearchEntity searchEntity = new SearchEntity();
         searchEntity.setQuery(query);
-        searchEntity.setText("Извините, я вас не поняла!");
+        searchEntity.setText("Извините, я вас не поняла. Повторите, пожалуйста!");
         searchEntity.setType("TEXT");
         return searchEntity;
     }
