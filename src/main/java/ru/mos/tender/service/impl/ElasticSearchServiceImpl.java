@@ -80,7 +80,10 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                 .forEach(navURL -> elasticResponses.add(new ElasticResponse()
                         .setQuery(navURL.getSearchEntity().getQuery())
                         .setSearchEntityId(navURL.getSearchEntity().getId())
-                        .setExtraInfo(new NavigationExtraInfo(navURL.getUri().toString(), navURL.getSearchEntity().getQuery()))
+                        .setExtraInfo(NavigationExtraInfo.valueOf(
+                                navURL.getUri().toString(),
+                                navURL.getSearchEntity().getQuery(),
+                                navURL.getSearchEntity().getText()))
                         .setType(ElasticResponseType.NAVIGATION)));
 
         //todo: временный костыль, надо исправить

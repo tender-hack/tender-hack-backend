@@ -1,6 +1,5 @@
 package ru.mos.tender.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,9 +8,15 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
 public class NavigationExtraInfo extends ExtraInfo {
     private String url;
-    private String query;
+
+    public static NavigationExtraInfo valueOf(String url, String query, String text) {
+        NavigationExtraInfo i = new NavigationExtraInfo();
+        i.url = url;
+        i.setQuery(query);
+        i.setText(text);
+        return i;
+    }
 }
