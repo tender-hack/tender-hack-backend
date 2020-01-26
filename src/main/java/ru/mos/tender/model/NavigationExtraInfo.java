@@ -13,5 +13,5 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 public class NavigationExtraInfo extends ExtraInfo {
     private String url;
-    
+
 }

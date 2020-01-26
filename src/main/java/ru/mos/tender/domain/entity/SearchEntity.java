@@ -7,9 +7,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.Setting;
+import ru.mos.tender.model.ChartItem;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.Text;
@@ -33,5 +36,9 @@ public class SearchEntity {
     private String name;
 
     private String type;
+
+    private String url;
+
+    private List<ChartItem> chart;
 
 }

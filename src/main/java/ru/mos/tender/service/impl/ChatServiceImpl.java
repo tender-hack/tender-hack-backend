@@ -7,8 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Service;
-import ru.mos.tender.model.Answer;
+import ru.mos.tender.enums.ElasticResponseType;
 import ru.mos.tender.model.ElasticResponse;
+import ru.mos.tender.model.ExtraInfo;
 import ru.mos.tender.model.Question;
 import ru.mos.tender.service.ChatService;
 import ru.mos.tender.service.ElasticSearchService;
@@ -28,10 +29,11 @@ public class ChatServiceImpl
 
     @Nonnull
     @Override
-    public Answer process(Question question) {
+    public ExtraInfo process(Question question) {
+        log.info(question.toString());
         ElasticResponse response = elasticSearchService.fullTextSearch(question.getText());
-        Answer answer = new Answer();
-        answer.setAnswerField(response.getExtraInfo());
+        ExtraInfo answer = response.getExtraInfo();
+        log.info(answer.toString());
         return answer;
     }
 
