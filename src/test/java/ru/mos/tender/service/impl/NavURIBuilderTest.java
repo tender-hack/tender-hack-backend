@@ -29,12 +29,12 @@ class NavURIBuilderTest {
         seParam2.setType(ElasticResponseType.NAVIGATION_PROPERTY.name());
         seParam2.setName("s.stateIdIn");
         seParam2.setText("190002");
-        List<URI> uris = navURIBuilder.fromSearchEntities(Arrays.asList(
+        List<NavURI> uris = navURIBuilder.fromSearchEntities(Arrays.asList(
                 seURI, seParam1, seParam2
         ));
         assertEquals(1, uris.size());
-        for (URI uri : uris) {
-            assertEquals("xxx?s.stateIdIn.0=190001&s.stateIdIn.1=190001", uri.toString());
+        for (NavURI navURI : uris) {
+            assertEquals("xxx?s.stateIdIn.0=190001&s.stateIdIn.1=190001", navURI.getUri().toString());
         }
     }
 }

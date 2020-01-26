@@ -6,15 +6,14 @@ import org.springframework.util.CollectionUtils;
 import ru.mos.tender.domain.entity.SearchEntity;
 import ru.mos.tender.enums.ElasticResponseType;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
 @Slf4j
 public class NavURIBuilder {
 
-    public List<URI> fromSearchEntities(Collection<SearchEntity> searchEntities) {
-        List<URI> results = new ArrayList<>();
+    public List<NavURI> fromSearchEntities(Collection<SearchEntity> searchEntities) {
+        List<NavURI> results = new ArrayList<>();
         try {
             List<SearchEntity> uriList = new ArrayList<>();
             List<SearchEntity> uriParams = new ArrayList<>();
@@ -43,7 +42,7 @@ public class NavURIBuilder {
                 for (Map.Entry<String, String> p : params.entrySet()) {
                     builder.addParameter(p.getKey(), p.getValue());
                 }
-                results.add(builder.build());
+                results.add(new NavURI(uriSE, builder.build()));
             }
         } catch (URISyntaxException e) {
             log.error(e.getMessage(), e);

@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import ru.mos.tender.domain.entity.SearchEntity;
 import ru.mos.tender.enums.ElasticResponseType;
 import ru.mos.tender.model.ChartExtraInfo;
@@ -25,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
@@ -58,6 +60,12 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                         .minimumShouldMatch("-50%"))
                 .build(), SearchEntity.class);
 
+        searchEntities.forEach(se -> se.setId(UUID.randomUUID()));
+
+        UUID winnerID = searchEntities
+                .stream().filter(ElasticResponseType::isNotNavProperty)
+                .findFirst().orElse(searchEntities.get(0)).getId();
+
         List<SearchEntity> navs = searchEntities.stream()
                 .filter(ElasticResponseType::isNav)
                 .collect(Collectors.toList());
@@ -69,15 +77,19 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                 .collect(Collectors.toList());
 
         navURIBuilder.fromSearchEntities(navs)
-                .forEach(navSE -> elasticResponses.add(new ElasticResponse()
-                        .setExtraInfo(new NavigationExtraInfo(navSE.toString()))
+                .forEach(navURL -> elasticResponses.add(new ElasticResponse()
+                        .setQuery(navURL.getSearchEntity().getQuery())
+                        .setSearchEntityId(navURL.getSearchEntity().getId())
+                        .setExtraInfo(new NavigationExtraInfo(navURL.getUri().toString()))
                         .setType(ElasticResponseType.NAVIGATION)));
+
         //todo: временный костыль, надо исправить
-        SearchEntity searchEntity = new SearchEntity();
-        searchEntity.setQuery(query);
-        searchEntity.setText("Извините, я вас не поняла!");
-        searchEntity.setType("TEXT");
-        return elasticResponses.isEmpty() ? buildElasticResponse(searchEntity) : elasticResponses.get(0);
+        if (CollectionUtils.isEmpty(elasticResponses)) {
+            return buildElasticResponse(SearchEntity.fallbackAnswer(query));
+        }
+
+        return elasticResponses.stream().filter(er -> er.getSearchEntityId().equals(winnerID))
+                .findFirst().orElse(elasticResponses.get(0));
     }
 
     @Nonnull
@@ -85,10 +97,8 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
         ExtraInfo extraInfo = new ExtraInfo();
         switch (ElasticResponseType.valueOf(entity.getType().toUpperCase())) {
             case TEXT:
+                extraInfo.setQuery(entity.getQuery());
                 extraInfo.setText(entity.getText());
-                break;
-            case NAVIGATION:
-                extraInfo = new NavigationExtraInfo().setUrl(entity.getUrl());
                 break;
             case CHART:
                 extraInfo = new ChartExtraInfo().setChartInfo(entity.getChart());
@@ -98,6 +108,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
                 extraInfo = new ExtraInfo();
         }
         return new ElasticResponse()
+                .setSearchEntityId(entity.getId())
                 .setQuery(entity.getQuery())
                 .setExtraInfo(extraInfo)
                 .setType(ElasticResponseType.valueOf(entity.getType().toUpperCase()));

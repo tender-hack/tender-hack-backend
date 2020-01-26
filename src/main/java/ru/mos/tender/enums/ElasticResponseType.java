@@ -1,12 +1,10 @@
 package ru.mos.tender.enums;
 
-import io.netty.util.internal.StringUtil;
 import org.thymeleaf.util.StringUtils;
 import ru.mos.tender.domain.entity.SearchEntity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public enum ElasticResponseType {
     NAVIGATION, NAVIGATION_PROPERTY, TEXT, CHART;
@@ -15,6 +13,14 @@ public enum ElasticResponseType {
 
     public static boolean isNotNav(SearchEntity searchEntity) {
         return !isNav(searchEntity);
+    }
+
+    public static boolean isNotNavProperty(SearchEntity searchEntity) {
+        return !isNavProperty(searchEntity);
+    }
+
+    private static boolean isNavProperty(SearchEntity searchEntity) {
+        return StringUtils.equalsIgnoreCase(NAVIGATION_PROPERTY.name(), searchEntity.getType());
     }
 
     public static boolean isNav(SearchEntity searchEntity) {

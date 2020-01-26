@@ -12,7 +12,6 @@ import ru.mos.tender.model.ChartItem;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.Text;
@@ -40,5 +39,13 @@ public class SearchEntity {
     private String url;
 
     private List<ChartItem> chart;
+
+    public static SearchEntity fallbackAnswer(String query) {
+        SearchEntity searchEntity = new SearchEntity();
+        searchEntity.setQuery(query);
+        searchEntity.setText("Извините, я вас не поняла!");
+        searchEntity.setType("TEXT");
+        return searchEntity;
+    }
 
 }
