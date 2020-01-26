@@ -74,20 +74,11 @@ public class Widget {
         if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "quotes")) {
             return "QUOTES";
         }
-        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "back")) {
-            return "BACK";
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "profile")) {
+            return "PROFILE";
         }
-        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "offer")) {
+        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "offers")) {
             return "OFFER";
-        }
-        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "sign")) {
-            return "SIGN";
-        }
-        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "login")) {
-            return "LOGIN";
-        }
-        if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "question")) {
-            return "QUESTION";
         }
         if (StringUtils.containsIgnoreCase(extraInfo.getUrl(), "contract")) {
             return "CONTRACT";
