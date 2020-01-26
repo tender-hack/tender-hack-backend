@@ -16,9 +16,7 @@ import ru.mos.tender.service.WidgetsService;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
-import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -46,10 +44,9 @@ public class WidgetsServiceImpl
     @Override
     @Transactional(readOnly = true)
     public List<WidgetInfo> getUserWidgets(@Nonnull Long userId) {
-        return Stream
-                .concat(
-                        widgetRepository.findAllByUserId(userId).stream(),
-                        widgetRepository.findAllByUserId(DEFAULT_USER_ID).stream())
+        return widgetRepository
+                .findAllByUserId(userId)
+                .stream()
                 .sorted((w1, w2) -> w2.getCounter() - w1.getCounter())
                 .map(this::toWidgetInfo)
                 .collect(toList());
