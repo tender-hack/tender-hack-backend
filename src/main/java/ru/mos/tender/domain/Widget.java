@@ -50,7 +50,7 @@ public class Widget {
     @Column(name = "counter")
     private Integer counter;
 
-    @Column(name = "extra")
+    @Column(name = "extra", columnDefinition="text")
     private String extra;
 
     public static Widget fromNavigationAnswer(Long userId, ElasticResponse response) {
