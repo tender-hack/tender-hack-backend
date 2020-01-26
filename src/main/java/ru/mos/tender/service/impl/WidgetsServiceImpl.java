@@ -23,8 +23,7 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class WidgetsServiceImpl
-        implements WidgetsService {
+public class WidgetsServiceImpl implements WidgetsService {
     private static final Long DEFAULT_USER_ID = 0L;
 
     private final WidgetRepository widgetRepository;

@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import ru.mos.tender.enums.WidgetType;
@@ -60,8 +61,18 @@ public class Widget {
         widget.setExtra(gson.toJson(response.getExtraInfo()));
         widget.setName(response.getQuery());
         widget.setType(WidgetType.NAVIGATION);
+        widget.setSubType(detectSubtype(response));
+
         widget.setUserId(userId);
         return widget;
+    }
+
+    private static String detectSubtype(ElasticResponse response) {
+
+//        if (StringUtils.containsIgnoreCase(response.getExtraInfo().getText(), "")) {
+//        }
+        //TODO
+        return "";
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Service;
 import ru.mos.tender.domain.Widget;
+import ru.mos.tender.enums.ElasticResponseType;
 import ru.mos.tender.model.ElasticResponse;
 import ru.mos.tender.model.ExtraInfo;
 import ru.mos.tender.model.Question;
@@ -20,9 +21,7 @@ import java.util.concurrent.ExecutorService;
 @RequiredArgsConstructor
 @Slf4j
 @ConditionalOnBean(ElasticsearchTemplate.class)
-public class ChatServiceImpl
-        implements ChatService {
-    private static final Long DEFAULT_USER_ID = 0L;
+public class ChatServiceImpl implements ChatService {
 
     private final ElasticSearchService elasticSearchService;
     private final WidgetsService widgetsService;
@@ -33,17 +32,18 @@ public class ChatServiceImpl
     public ExtraInfo process(Question question) {
         log.info(question.toString());
         ElasticResponse response = elasticSearchService.fullTextSearch(question.getText());
-        widgetCreatingExecutorService.submit(() -> {
-                    try {
-                        widgetsService.createIfNotExists(Widget.fromNavigationAnswer(DEFAULT_USER_ID, response));
-                    } catch (Exception e) {
-                        log.error(e.getMessage(), e);
+        if (response.getType().equals(ElasticResponseType.NAVIGATION)) {
+            widgetCreatingExecutorService.submit(() -> {
+                        try {
+                            widgetsService.createIfNotExists(Widget.fromNavigationAnswer(1L, response));
+                        } catch (Exception e) {
+                            log.error(e.getMessage(), e);
+                        }
                     }
-                }
-        );
+            );
+        }
         ExtraInfo answer = response.getExtraInfo();
         log.info(answer.toString());
         return answer;
     }
-
 }
