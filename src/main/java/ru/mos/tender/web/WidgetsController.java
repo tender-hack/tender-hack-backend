@@ -39,7 +39,7 @@ public class WidgetsController {
                 .setExtra("{\"url\":\"/contracts\"}")
                 .setName("Перейти в мои контракты")
                 .setType(WidgetType.NAVIGATION)
-                .setSubType("CONTRACTS");
+                .setSubType("CONTRACT");
         widgetsService.create(widget);
     }
 }
