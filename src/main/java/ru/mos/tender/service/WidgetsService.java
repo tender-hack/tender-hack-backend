@@ -18,5 +18,7 @@ public interface WidgetsService {
     void increment(@Nonnull UUID widgetUid, @Nonnull Long userId);
 
     @Nonnull
-    WidgetInfo saveNewWidget(@Nonnull Widget widget);
+    WidgetInfo create(@Nonnull Widget widget);
+
+    void createIfNotExists(Widget fromNavigationAnswer);
 }

@@ -40,6 +40,6 @@ public class WidgetsController {
                 .setName("Перейти на мои контракты")
                 .setType(WidgetType.NAVIGATION)
                 .setSubType("CONTRACTS");
-        widgetsService.saveNewWidget(widget);
+        widgetsService.create(widget);
     }
 }

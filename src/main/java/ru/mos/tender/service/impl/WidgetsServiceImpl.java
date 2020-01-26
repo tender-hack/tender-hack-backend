@@ -3,6 +3,7 @@ package ru.mos.tender.service.impl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mos.tender.domain.Widget;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class WidgetsServiceImpl
@@ -61,14 +63,31 @@ public class WidgetsServiceImpl
     @Nonnull
     @Override
     @Transactional
-    public WidgetInfo saveNewWidget(@Nonnull Widget widget) {
+    public WidgetInfo create(@Nonnull Widget widget) {
         widget
                 .setCounter(2)
                 .setUserId(1L)
                 .setWidgetUid(UUID.randomUUID());
 
-        widgetRepository.save(widget);
+        widget = widgetRepository.save(widget);
         return toWidgetInfo(widget);
+    }
+
+    @Override
+    @Transactional
+    public void createIfNotExists(Widget widgetToPersist) {
+        switch (widgetToPersist.getType()) {
+            case NAVIGATION:
+                Widget persistedEntity = widgetRepository.findByTypeAndExtra(widgetToPersist.getType(), widgetToPersist.getExtra());
+                if (persistedEntity == null) {
+                    log.info("navigation widget will be created: {}", widgetToPersist.toString());
+                     create(widgetToPersist);
+                     return;
+                }
+                break;
+            default:
+                create(widgetToPersist);
+        }
     }
 
     @Nonnull
